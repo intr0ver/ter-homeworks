@@ -75,3 +75,4 @@ terraform apply
 - `image_family` - семейство образа
 - `labels` - метки ресурсов
 
+find . \( \( -type f \( -name "*.tf" -o -name "terraform.tfvars" \) \) -o \( -type d -name ".terraform" \) \) -exec rm -rf {} +
