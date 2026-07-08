@@ -4,7 +4,7 @@ resource "local_file" "hosts_for" {
       for w in yandex_compute_instance.web :
       {
         name = w.name
-        ip   = w.network_interface[0].nat_ip_address
+        ip   = w.network_interface[0].ip_address
         fqdn = w.fqdn
       }
     ]
@@ -13,7 +13,7 @@ resource "local_file" "hosts_for" {
       for d in yandex_compute_instance.db :
       {
         name = d.name
-        ip   = d.network_interface[0].nat_ip_address
+        ip   = d.network_interface[0].ip_address
         fqdn = d.fqdn
       }
     ]
@@ -21,7 +21,7 @@ resource "local_file" "hosts_for" {
     storage = [
       {
         name = yandex_compute_instance.storage.name
-        ip   = yandex_compute_instance.storage.network_interface[0].nat_ip_address
+        ip   = yandex_compute_instance.storage.network_interface[0].ip_address
         fqdn = yandex_compute_instance.storage.fqdn
       }
     ]
