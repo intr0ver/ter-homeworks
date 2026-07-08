@@ -1,8 +1,8 @@
 ###cloud vars
-variable "token" {
-  type        = string
-  description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
-}
+# variable "token" {
+#   type        = string
+#   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
+# }
 
 variable "cloud_id" {
   type        = string
@@ -29,4 +29,34 @@ variable "vpc_name" {
   type        = string
   default     = "develop"
   description = "VPC network&subnet name"
+}
+data "yandex_compute_image" "ubuntu" {
+  family = "ubuntu-2204-lts"
+}
+
+
+variable "each_vm" {
+  type = list(object({
+    vm_name       = string
+    cpu           = number
+    ram           = number
+    disk_volume   = number
+    core_fraction = number
+  }))
+  default = [
+    {
+      vm_name     = "main"
+      cpu         = 4
+      ram         = 2
+      disk_volume = 11
+      core_fraction = 50
+    },
+    {
+      vm_name     = "replica"
+      cpu         = 2
+      ram         = 1
+      disk_volume = 10
+      core_fraction = 20
+    }
+  ]
 }
